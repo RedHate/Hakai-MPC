@@ -22,12 +22,11 @@ you then have to issue this following command so you dont continually mount over
 	umount "/sys/firmware/devicetree/base/inmusic,product-code"
 
 
-
 ## Example snippet from ultros az01-launch-MPC script from the Hakai Version 2 CFW.
 	
 	if [ ! -e /tmp/force ]; then
 		
-		echo "Launching MPC X Mode" >> /media/acvs-synth/cfw.log
+		echo "Launching MPC" >> /media/acvs-synths/cfw.log
 		
 		## ORIGINAL MPC SOFTWARE
 		touch /tmp/force
@@ -37,11 +36,13 @@ you then have to issue this following command so you dont continually mount over
 		umount "/sys/firmware/devicetree/base/inmusic,panel-rotation"
 		
 		## mount the magic
-		mount -o bind "/root/models/x/inmusic,panel-rotation" "/sys/firmware/devicetree/base/inmusic,panel-rotation"
 		mount -o bind "/root/models/x/inmusic,product-code"   "/sys/firmware/devicetree/base/inmusic,product-code"
+		## because sometimes the screen will rotate, odd bug maybe the force uses a diff orientation.
+		mount -o bind "/root/models/x/inmusic,panel-rotation" "/sys/firmware/devicetree/base/inmusic,panel-rotation"
 		
-		cat "/sys/firmware/devicetree/base/inmusic,panel-rotation"  >> /media/acvs-synth/cfw.log
-		cat "/sys/firmware/devicetree/base/inmusic,product-code"    >> /media/acvs-synth/cfw.log
+		## log it
+		cat "/sys/firmware/devicetree/base/inmusic,panel-rotation"  >> /media/acvs-synths/cfw.log
+		cat "/sys/firmware/devicetree/base/inmusic,product-code"    >> /media/acvs-synths/cfw.log
 		
 		if type systemd-inhibit >/dev/null 2>&1
 		then
@@ -53,7 +54,7 @@ you then have to issue this following command so you dont continually mount over
 
 	else
 
-		echo "Launching FORCE Mode" >> /media/acvs-synth/cfw.log
+		echo "Launching FORCE" >> /media/acvs-synths/cfw.log
 		
 		##FOCE SOFTWARE
 		rm /tmp/force
@@ -63,11 +64,13 @@ you then have to issue this following command so you dont continually mount over
 		umount "/sys/firmware/devicetree/base/inmusic,panel-rotation"
 		
 		## mount the magic
-		mount -o bind "/root/models/force/inmusic,panel-rotation" "/sys/firmware/devicetree/base/inmusic,panel-rotation"
 		mount -o bind "/root/models/force/inmusic,product-code"   "/sys/firmware/devicetree/base/inmusic,product-code"
+		## because sometimes the screen will rotate, odd bug maybe the force uses a diff orientation.
+		mount -o bind "/root/models/force/inmusic,panel-rotation" "/sys/firmware/devicetree/base/inmusic,panel-rotation"
 		
-		cat "/sys/firmware/devicetree/base/inmusic,panel-rotation"  >> /media/acvs-synth/cfw.log
-		cat "/sys/firmware/devicetree/base/inmusic,product-code"    >> /media/acvs-synth/cfw.log
+		##log it
+		cat "/sys/firmware/devicetree/base/inmusic,panel-rotation"  >> /media/acvs-synths/cfw.log
+		cat "/sys/firmware/devicetree/base/inmusic,product-code"    >> /media/acvs-synths/cfw.log
 		
 		export LD_PRELOAD="/usr/lib/libSOUL_PatchLoader.so /usr/lib/libcares.so.2.4.0 /usr/lib/libbluetooth.so.3.19.2" 
 		
@@ -80,4 +83,20 @@ you then have to issue this following command so you dont continually mount over
 		fi
 		
 	fi
+	
+## how to make hypesynth content work properly
+
+Format a memory card with fat or ntfs and name it (not that it must be lower-case): 
+	
+	acvs-synths
+	
+This can be acheived on linus with this command if using fat (fat defaults to upper-case disk names, to get around it we do this)
+
+	fatlabel /dev/sda1 acvs-synths
+
+Otherwise gparted will suffice and regular conventional naming. Next you'll want to populate some folders:
+
+	mkdir /media/acvs-synths/Synths
+	mkdir /media/acvs-synths/Synths/Hype
+
 	
