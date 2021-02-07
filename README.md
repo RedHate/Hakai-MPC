@@ -104,7 +104,7 @@ The acvs-synths card must be in the unit before you power it on or it will NOT m
 
 ## Bonus info!!
 
-Ok, so I've done some testing with alsa and usbsoundcards, damn near bricked my unit... *DO NOT MESS WITH THE DEFAULT ALSA CONFIG!!!!* it will result in a bootloop and your system being dicked unless you DFU or use a timeout script to delay the process while you sneak in and ssh.
+Ok, so I've done some testing with alsa and usb soundcards, damn near bricked my unit... *DO NOT MESS WITH THE DEFAULT ALSA CONFIG!!!!* it will result in a bootloop and your system being dicked unless you DFU or use a timeout script to delay the process while you sneak in and ssh.
 
 Here are my findings, this works on my numark mixdeck express plugged in via usb. Thus meaning the kerenl supports usb audio and is functional. If the program tries to run with anything other than the 1'st card ("ACVA" in my case) it immediately shuts down the unit.
 	
@@ -115,6 +115,6 @@ To see for yourself that your usb cards are listed and recognized try this:
 	CARDS=$(aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq)
 	for d in $CARDS; do if [ "$CARD"!="ACVA" ]; then echo "$d"; fi; done;
 
-Once you isolate the 2nd card's name issue the command above with a path to your own wave to send it to the usb sound card device... Might be fun to audio-brand the start up.
+Once you isolate the 2nd card's name issue the command above with a path to your own wave to send it to the usb sound card device... Might be fun to audio-brand the start up. However currently I would say that using a USB soundcard for sampling and playback within the MPC software is not a realistic desired just due to design.
 
 
