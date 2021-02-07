@@ -84,7 +84,7 @@ you then have to issue this following command so you dont continually mount over
 		
 	fi
 	
-## how to make hypesynth content work properly
+## How to make hypesynth content work properly
 
 Format a memory card with fat or ntfs and name it (not that it must be lower-case): 
 	
