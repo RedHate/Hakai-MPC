@@ -1,7 +1,7 @@
 
-Ultros 2021 Akai System Spoofing Data For MPC ONE, LIVE and X
+# Ultros 2021 Akai System Spoofing Data For MPC ONE, LIVE and X
 
-Synopsys of system spoofing on Akai's MPC product line:
+# Synopsys of system spoofing on Akai's MPC product line:
 
 	In order to have alternate software builds work on the MPC or to unlock features locked by baked in
 	conditionals one needs only to spoof the identify of the device.
@@ -11,20 +11,19 @@ Synopsys of system spoofing on Akai's MPC product line:
 	
 	The issuing of the following mount bind command ****MUST**** take place before the MPC software is executed.
 	
-	[code]
-		mount -o bind "/root/models/inmusic,product-code"   "/sys/firmware/devicetree/base/inmusic,product-code"
-	[/code]
+
+	## mount -o bind "/root/models/inmusic,product-code"   "/sys/firmware/devicetree/base/inmusic,product-code"
+
 	
 	When the program is exited or when the software is restarted say into a different mode like from Force software to MPC
 	you then have to issue this following command so you dont continually mount over the same file.
 	
-	[code]
-		umount "/sys/firmware/devicetree/base/inmusic,product-code"
-	[/code]
+
+	## umount "/sys/firmware/devicetree/base/inmusic,product-code"
+
 
 
 	##Example snippet from ultros az01-launch-MPC script from the Hakai Version 2 CFW.
-	[code]
 		
 		if [ ! -e /tmp/force ]; then
 			
@@ -82,4 +81,3 @@ Synopsys of system spoofing on Akai's MPC product line:
 			
 		fi
 	
-	[code]
