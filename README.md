@@ -115,6 +115,7 @@ To see for yourself that your usb cards are listed and recognized try this:
 	CARDS=$(aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq)
 	for d in $CARDS; do if [ "$CARD"!="ACVA" ]; then echo "$d"; fi; done;
 
-Once you isolate the 2nd card's name issue the command above with a path to your own wave to send it to the usb sound card device... Might be fun to audio-brand the start up. However currently I would say that using a USB soundcard for sampling and playback within the MPC software is not a realistic desired just due to design.
+Once you isolate the 2nd card's name issue the command above with a path to your own wave to send it to the usb sound card device... Might be fun to audio-brand the start up. However currently I would say that using a USB soundcard for sampling and playback within the MPC software is not a realistic desire just due to design.
 
+I need to proof read more and commit less.
 
