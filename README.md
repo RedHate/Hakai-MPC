@@ -86,7 +86,7 @@ you then have to issue this following command so you dont continually mount over
 	
 ## How to make hypesynth content work properly
 
-Format a memory card with fat or ntfs and name it (not that it must be lower-case): 
+Format a memory card with fat or ext4 (*grrr typos.. lol*) and name it.... *note* that it must be lower-case: 
 	
 	acvs-synths
 	
