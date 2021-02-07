@@ -106,7 +106,7 @@ The acvs-synths card must be in the unit before you power it on or it will NOT m
 
 Ok, so I've done some testing with alsa and usb soundcards, damn near bricked my unit... *DO NOT MESS WITH THE DEFAULT ALSA CONFIG!!!!* it will result in a bootloop and your system being dicked unless you DFU or use a timeout script to delay the process while you sneak in and ssh.
 
-Here are my findings, this works on my numark mixdeck express plugged in via usb. Thus meaning the kerenl supports usb audio and is functional. If the program tries to run with anything other than the 1'st card ("ACVA" in my case) it immediately shuts down the unit.
+Here are my findings, this works on my numark mixdeck express plugged in via usb. Thus meaning the kerenl supports usb audio and is functional. If the MPC software tries to run with anything other than the 1st card ("ACVA" in my case) it immediately shuts down the unit.
 	
 	aplay -D default:Express "/media/acvs-content/Expansions/MPC One/HipHop-Stab-BDWK Stb1.WAV"
 	
