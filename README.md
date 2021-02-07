@@ -1,6 +1,8 @@
 
 # Ultros 2021 Akai System Spoofing Data For MPC ONE, LIVE and X
 
+## The basis for the Hakai 2.9.0 (VERSION 2) force enabled firmware found on mpc-forums.com
+
 In order to have alternate software builds work on the MPC or to unlock features locked by baked in
 conditionals one needs only to spoof the identify of the device.
 
