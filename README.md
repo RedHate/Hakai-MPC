@@ -99,4 +99,6 @@ Otherwise gparted will suffice and regular conventional naming. Next you'll want
 	mkdir /media/acvs-synths/Synths
 	mkdir /media/acvs-synths/Synths/Hype
 
-	
+The acvs-synths card must be in the unit before you power it on or it will NOT mount! (super frustraiting!) I better not fail to mention this as people will want to tear their hair out if they don't figure it out on their own. "acvs-synths" is mounted by a service it seems.
+
+
