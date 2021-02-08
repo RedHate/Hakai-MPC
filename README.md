@@ -121,7 +121,7 @@ I need to proof read more and commit less.
 
 ## Oh yeah... 
 
-By the way obviously thekikgen has had a little cruise through these but these are objects of interest for those of you that may have not had a look.
+By the way, these are objects of interest for those of you that may have not had a look.
 
 	#ITEMS OF INTEREST										#CONTENT OF SAID ITEMS
 	/sys/firmware/devicetree/base/inmusic,product-code						ACVA
