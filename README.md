@@ -1,6 +1,11 @@
 
 # Ultros 2021 Akai System Spoofing Data For MPC ONE, LIVE and X
 
+First of all, Thank you to TheKikGen for taking the work out of modding the rom. You've done an excellent job with the tools and documentations. For those of you that haven't first taken a look at TheKikGen's github look here this is the foundation for rom modding and source for technical data: https://github.com/TheKikGen
+
+TheKikgen's ssh enabled firmware can be found here: https://github.com/TheKikGen/MPC-LiveXplore
+
+
 ## The basis for the Hakai 2.9.0 (VERSION 2) force enabled firmware found on mpc-forums.com
 
 In order to have alternate software builds work on the MPC or to unlock features locked by baked in
@@ -116,6 +121,8 @@ To see for yourself that your usb cards are listed and recognized try this:
 	for d in $CARDS; do if [ "$CARD"!="ACVA" ]; then echo "$d"; fi; done;
 
 Once you isolate the 2nd card's name issue the command above with a path to your own wave to send it to the usb sound card device... Might be fun to audio-brand the start up. However currently I would say that using a USB soundcard for sampling and playback within the MPC software is not a realistic desire just due to design.
+
+There does appear to be some stuff on thekikgen's repo, but if not analyzed the content yet to see if there's been progress made here. Feel free to look https://github.com/TheKikGen/MPC-LiveXplore/tree/master/conf
 
 I need to proof read more and commit less.
 
