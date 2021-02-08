@@ -99,7 +99,7 @@ Otherwise gparted will suffice and regular conventional naming. Next you'll want
 	mkdir /media/acvs-synths/Synths
 	mkdir /media/acvs-synths/Synths/Hype
 
-The acvs-synths card must be in the unit before you power it on or it will NOT mount! (super frustraiting!) I better not fail to mention this as people will want to tear their hair out if they don't figure it out on their own. "acvs-synths" is mounted by a service it seems.
+The acvs-synths card must be in the unit before you power it on or it will NOT mount! (super frustrating!) I better not fail to mention this as people will want to tear their hair out if they don't figure it out on their own. "acvs-synths" is mounted by a service it seems.
 
 
 ## Bonus info!!
@@ -119,3 +119,11 @@ Once you isolate the 2nd card's name issue the command above with a path to your
 
 I need to proof read more and commit less.
 
+## Oh yeah... by the way obviously thekikgen has had a little cruise through these but these are objects of interest
+
+	#ITEMS OF INTEREST										#CONTENT OF SAID ITEMS
+	/sys/firmware/devicetree/base/inmusic,product-code						ACVA
+	/sys/firmware/devicetree/base/compatible							inmusic,acvainmusic,az01rockchip,rk3288
+	/sys/firmware/devicetree/base/serial-number							AXXXXXXXXXXXXXXXXXX
+	/sys/firmware/devicetree/base/inmusic,az01-pcb-rev						J
+	/sys/firmware/devicetree/base/inmusic,panel-rotation						N/A (hex)
