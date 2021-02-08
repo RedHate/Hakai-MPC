@@ -119,7 +119,9 @@ Once you isolate the 2nd card's name issue the command above with a path to your
 
 I need to proof read more and commit less.
 
-## Oh yeah... by the way obviously thekikgen has had a little cruise through these but these are objects of interest
+## Oh yeah... 
+
+By the way obviously thekikgen has had a little cruise through these but these are objects of interest for those of you that may have not had a look.
 
 	#ITEMS OF INTEREST										#CONTENT OF SAID ITEMS
 	/sys/firmware/devicetree/base/inmusic,product-code						ACVA
