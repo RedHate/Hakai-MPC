@@ -138,7 +138,67 @@ By the way, these are objects of interest for those of you that may have not had
 	/sys/firmware/devicetree/base/inmusic,panel-rotation						N/A (hex)
 	
 
-## I WAS WRONG!!! GASP... touch, mouse and keys are handled by libinput but no midi!! (See TheKikGen, you *DO* know more! LOL)
+
+## Results of libinput testing:
+I WAS WRONG!!! GASP... touch, mouse and keys are handled by libinput but no midi!! (See TheKikGen, you *DO* know more! LOL)
+
+Results of libinput device listing:
+
+	# libinput list-devices
+	Device:           ILI2117 Touchscreen
+	Kernel:           /dev/input/event0
+	Group:            1
+	Seat:             seat0, default
+	Capabilities:     touch 
+	Tap-to-click:     n/a
+	Tap-and-drag:     n/a
+	Tap drag lock:    n/a
+	Left-handed:      n/a
+	Nat.scrolling:    n/a
+	Middle emulation: n/a
+	Calibration:      identity matrix
+	Scroll methods:   none
+	Click methods:    none
+	Disable-w-typing: n/a
+	Accel profiles:   n/a
+	Rotation:         n/a
+
+	Device:           Logitech Wireless Receiver Mouse
+	Kernel:           /dev/input/event2
+	Group:            2
+	Seat:             seat0, default
+	Capabilities:     pointer 
+	Tap-to-click:     n/a
+	Tap-and-drag:     n/a
+	Tap drag lock:    n/a
+	Left-handed:      disabled
+	Nat.scrolling:    disabled
+	Middle emulation: disabled
+	Calibration:      n/a
+	Scroll methods:   button
+	Click methods:    none
+	Disable-w-typing: n/a
+	Accel profiles:   flat *adaptive
+	Rotation:         n/a
+
+	Device:           gpio-keys
+	Kernel:           /dev/input/event1
+	Group:            3
+	Seat:             seat0, default
+	Capabilities:     keyboard 
+	Tap-to-click:     n/a
+	Tap-and-drag:     n/a
+	Tap drag lock:    n/a
+	Left-handed:      n/a
+	Nat.scrolling:    n/a
+	Middle emulation: n/a
+	Calibration:      n/a
+	Scroll methods:   none
+	Click methods:    none
+	Disable-w-typing: n/a
+	Accel profiles:   n/a
+	Rotation:         n/a
+
 
 Results of libinput debugging:
 
@@ -153,7 +213,7 @@ Results of libinput debugging:
 	 event1   KEYBOARD_KEY     +1.881s	KEY_POWER (116) released
 
 
-## Results of midi testing the control interface...
+## Results of midi testing the control interface:
 
 List off the midi devices:
 
@@ -193,4 +253,4 @@ Capturing midi events:
 
 	# systemctl stop inmusic-mpc.service
 	# arecordmidi -p 16:1 /media/<sdcard>/midi.log
-
+	
