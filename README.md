@@ -136,3 +136,61 @@ By the way, these are objects of interest for those of you that may have not had
 	/sys/firmware/devicetree/base/serial-number							AXXXXXXXXXXXXXXXXXX
 	/sys/firmware/devicetree/base/inmusic,az01-pcb-rev						J
 	/sys/firmware/devicetree/base/inmusic,panel-rotation						N/A (hex)
+	
+
+## I WAS WRONG!!! GASP... touch, mouse and keys are handled by libinput but no midi!! (See TheKikGen, you *DO* know more! LOL)
+
+Results of libinput debugging:
+
+	# libinput debug-events
+	-event0   DEVICE_ADDED     ILI2117 Touchscreen               seat0 default group1  cap:t ntouches 10 calib
+	-event1   DEVICE_ADDED     gpio-keys                         seat0 default group2  cap:k
+	-event0   TOUCH_DOWN       +0.000s	0 (0) 22.21/36.99 (455.00/758.00mm)
+	 event0   TOUCH_FRAME      +0.000s	
+	 event0   TOUCH_UP         +0.130s	
+	 event0   TOUCH_FRAME      +0.130s	
+	-event1   KEYBOARD_KEY     +1.727s	KEY_POWER (116) pressed
+	 event1   KEYBOARD_KEY     +1.881s	KEY_POWER (116) released
+
+
+## Results of midi testing the control interface...
+
+List off the midi devices:
+
+	# aconnect -o
+	client 16: 'MPC One MIDI' [type=kernel,card=0]
+		0 'MPC Studio Live Public'
+		1 'MPC Studio Live Private'
+		2 'MPC Studio Live MIDI Port'
+	client 130: 'Virtual MIDI Output 1 Input' [type=user,pid=253]
+		0 'in              '
+	client 131: 'Virtual MIDI Output 2 Input' [type=user,pid=253]
+		0 'in      
+
+Then free up the port by deinitilaizing the inmusic-mpc.service and test with aseqdump -p 16:1
+
+	# systemctl stop inmusic-mpc.service
+	# aseqdump -p 16:1
+	Waiting for data. Press Ctrl+C to end.
+	
+	Source  Event                  Ch  Data
+	 16:1   Note on                 9, note 43, velocity 127
+	 16:1   Note on                 9, note 45, velocity 56
+	 16:1   Note off                9, note 45, velocity 0
+	 16:1   Polyphonic aftertouch   9, note 43, value 13
+	 16:1   Polyphonic aftertouch   9, note 43, value 14
+	 16:1   Polyphonic aftertouch   9, note 43, value 17
+	 16:1   Polyphonic aftertouch   9, note 43, value 28
+	 16:1   Polyphonic aftertouch   9, note 43, value 27
+	 16:1   Polyphonic aftertouch   9, note 43, value 21
+	 16:1   Polyphonic aftertouch   9, note 43, value 20
+	 16:1   Polyphonic aftertouch   9, note 43, value 10
+	 16:1   Polyphonic aftertouch   9, note 43, value 4
+	 16:1   Polyphonic aftertouch   9, note 43, value 1
+	 16:1   Polyphonic aftertouch   9, note 43, value 0
+	 
+Capturing midi events:
+
+	# systemctl stop inmusic-mpc.service
+	# arecordmidi -p 16:1 /media/<sdcard>/midi.log
+
