@@ -253,4 +253,53 @@ Capturing midi events:
 
 	# systemctl stop inmusic-mpc.service
 	# arecordmidi -p 16:1 /media/<sdcard>/midi.log
-	
+
+##Internal Midi Device Channel and Values
+
+The pad's are registered on channel 9 and here is the diagram. (MPC One)
+
+      +-------------------+
+      | 49 | 55 | 51 | 53 |
+      |-------------------|
+      | 48 | 47 | 45 | 43 |
+      |-------------------|
+      | 40 | 38 | 46 | 44 |
+      |-------------------|
+      | 37 | 36 | 42 | 82 |
+      +-------------------+
+
+The rest of the buttons (on the mpc one, feel free to add)
+
+	Record: 		73
+	Overdub: 		80
+	Stop: 			81
+	play: 			82
+	play start: 	        83
+	Step Seq: 		41 
+	TC: 			12 
+	Sampler: 		125 
+	Sample Edit: 	        6 
+	Program Edit: 	        2
+	Undo:			67
+	Tempo: 			53
+	Shift: 			49
+	Menu: 			123
+	Main: 			52 
+	Browse: 		50 
+	Track Mix: 		116 
+	Track Mute: 	        43 
+	Next Seq: 		42
+	bank A: 		35
+	bank B: 		36
+	bank C: 		37
+	bank D: 		38
+	Qlink Select: 	        0
+	Note Repeat: 	        11
+	Erase: 			9
+	Copy: 			122
+	Sixteen Levels:         40
+	Fuil Level: 	        39
+	Knob: 			100
+	Knob-Push: 		111
+	Minus: 			12
+	Plus: 			125
