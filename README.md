@@ -1,12 +1,14 @@
 
-# Ultros 2021 Akai System Spoofing Data For MPC ONE, LIVE and X
+## Ultros 2021 - MPC Exploration and hacks.
+
+# Akai System Spoofing Data For MPC ONE, LIVE and X
 
 First of all, Thank you to TheKikGen for taking the work out of modding the rom. You've done an excellent job with the tools and documentations. For those of you that haven't first taken a look at TheKikGen's github look here this is the foundation for rom modding and source for technical data: https://github.com/TheKikGen
 
 TheKikgen's ssh enabled firmware can be found here: https://github.com/TheKikGen/MPC-LiveXplore
 
 
-## The basis for the Hakai 2.9.0 (VERSION 2) force enabled firmware found on mpc-forums.com
+# The basis for the Hakai 2.9.0 (VERSION 2) force enabled firmware found on mpc-forums.com
 
 In order to have alternate software builds work on the MPC or to unlock features locked by baked in
 conditionals one needs only to spoof the identify of the device.
@@ -27,7 +29,7 @@ you then have to issue this following command so you dont continually mount over
 	umount "/sys/firmware/devicetree/base/inmusic,product-code"
 
 
-## Example snippet from ultros az01-launch-MPC script from the Hakai Version 2 CFW.
+# Example snippet from ultros az01-launch-MPC script from the Hakai Version 2 CFW.
 	
 	if [ ! -e /tmp/force ]; then
 		
@@ -89,7 +91,7 @@ you then have to issue this following command so you dont continually mount over
 		
 	fi
 	
-## How to make hypesynth content work properly
+# How to make hypesynth content work properly
 
 Format a memory card with fat or ext4 (*grrr typos.. lol*) and name it.... *note* that it must be lower-case: 
 	
@@ -107,7 +109,7 @@ Otherwise gparted will suffice and regular conventional naming. Next you'll want
 The acvs-synths card must be in the unit before you power it on or it will NOT mount! (super frustrating!) I better not fail to mention this as people will want to tear their hair out if they don't figure it out on their own. "acvs-synths" is mounted by a service it seems.
 
 
-## Bonus info!!
+# Bonus info!!
 
 Ok, so I've done some testing with alsa and usb soundcards, damn near bricked my unit... *DO NOT MESS WITH THE DEFAULT ALSA CONFIG!!!!* it will result in a bootloop and your system being dicked unless you DFU or use a timeout script to delay the process while you sneak in and ssh.
 
@@ -126,7 +128,7 @@ There does appear to be some stuff on thekikgen's repo, but if not analyzed the 
 
 I need to proof read more and commit less.
 
-## Oh yeah... 
+# Oh yeah... 
 
 By the way, these are objects of interest for those of you that may have not had a look.
 
@@ -139,7 +141,7 @@ By the way, these are objects of interest for those of you that may have not had
 	
 
 
-## Results of libinput testing:
+# Results of libinput testing:
 I WAS WRONG!!! GASP... touch, mouse and keys are handled by libinput but no midi!! (See TheKikGen, you *DO* know more! LOL)
 
 Results of libinput device listing:
@@ -213,7 +215,7 @@ Results of libinput debugging:
 	 event1   KEYBOARD_KEY     +1.881s	KEY_POWER (116) released
 
 
-## Results of midi testing the control interface:
+# Results of midi testing the control interface:
 
 List off the midi devices:
 
@@ -254,7 +256,7 @@ Capturing midi events:
 	# systemctl stop inmusic-mpc.service
 	# arecordmidi -p 16:1 /media/<sdcard>/midi.log
 
-##Internal Midi Device Channel and Values
+# Internal Midi Device Channel and Values
 
 The pad's are registered on channel 9 and here is the diagram. (MPC One)
 
