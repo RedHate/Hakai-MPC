@@ -305,3 +305,7 @@ The rest of the buttons (on the mpc one, feel free to add)
 	Knob-Push: 		111
 	Minus: 			12
 	Plus: 			125
+	Q-Link 1 		19
+	Q-link 2 		18
+	Q-link 3 		17
+	Q-link 3 		16
