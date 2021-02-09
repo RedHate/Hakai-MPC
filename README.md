@@ -256,9 +256,9 @@ Capturing midi events:
 	# systemctl stop inmusic-mpc.service
 	# arecordmidi -p 16:1 /media/<sdcard>/midi.log
 
-# Internal Midi Device Channel and Values
+# Internal midi device channel and values
 
-The pad's are registered on channel 9 and here is the diagram. (MPC One)
+The control interface is registered on channel 9 and here is the diagram. (MPC One)
 
       +-------------------+
       | 49 | 55 | 51 | 53 |
