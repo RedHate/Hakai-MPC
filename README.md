@@ -272,6 +272,8 @@ The control interface is registered on channel 9 and here is the diagram. (MPC O
 
 The rest of the buttons (on the mpc one, feel free to add)
 
+	#LABLE                  #MIDI NO
+	--------------------------------
 	Record: 		73
 	Overdub: 		80
 	Stop: 			81
@@ -291,10 +293,10 @@ The rest of the buttons (on the mpc one, feel free to add)
 	Track Mix: 		116 
 	Track Mute: 	        43 
 	Next Seq: 		42
-	bank A: 		35
-	bank B: 		36
-	bank C: 		37
-	bank D: 		38
+	Bank A: 		35
+	Bank B: 		36
+	Bank C: 		37
+	Bank D: 		38
 	Qlink Select: 	        0
 	Note Repeat: 	        11
 	Erase: 			9
@@ -305,7 +307,11 @@ The rest of the buttons (on the mpc one, feel free to add)
 	Knob-Push: 		111
 	Minus: 			12
 	Plus: 			125
-	Q-Link 1 		19
-	Q-link 2 		18
-	Q-link 3 		17
-	Q-link 3 		16
+	Q-Link 1: 		19
+	Q-link 2: 		18
+	Q-link 3: 		17
+	Q-link 3: 		16
+	Q-Link 1 Touch 		87
+	Q-link 2 Touch		86
+	Q-link 3 Touch		85
+	Q-link 3 Touch		84
