@@ -1,0 +1,169 @@
+#!/bin/sh
+#
+# Version 3.0 some bug fixes stand-alone still cris crossed though LOL, will fix it
+#
+# Test in SSH before flashing! Don't be a dummy and blindly trust me. I make mistakes.
+#
+
+# find dfu util info
+DFUUTILINFO=$(dfu-util -l | grep "0x08000000")
+
+#if in dfu-update mode run firmware update script
+[ "x$DFUUTILINFO" != "x" ] && sh /usr/share/Akai/SME0/Firmware/update.sh
+
+# wait for udev
+udevadm settle
+
+# look for usb drives
+M_LIST=$(lsblk -o MOUNTPOINT,SUBSYSTEMS | grep '^\/.*usb' | cut -d' ' -f1)
+echo "Mounted usb disks : $M_LIST" > /media/acvs-synths/cfw.log
+
+# ultros's remnant hook (scripts only from usb is a good idea, we dont wanna continually run them from mmc)
+if [ "x$M_LIST" != "x" ]
+then
+	for M_POINT in $M_LIST ; do 
+		sh $M_POINT/scripts/hakai.sh
+	done
+fi
+
+MEMCARD=
+
+# unmount the memcard
+if [ -e "/media/memorycard" ]; then
+	umount /media/memorycard
+	rm /tmp/memorycard.lock
+fi
+
+#
+# NOT SAFE FOR USE ON X OR LIVE (WILL DIRTY INTERNAL CONTENTS) USE ONLY WITH MPC ONE
+#
+# mount the memcard
+#if [ -e "/dev/mmcblk0p1" ]; then
+#	if [ ! -e /tmp/memorycard.lock ]; then
+#		if [ ! -e "/media/memorycard" ]; then
+#			mkdir /media/memorycard
+#		fi
+#		mount /dev/mmcblk0p1 /media/memorycard
+#		touch /tmp/memorycard.lock
+#		MEMCARD=/dev/mmcblk0p1
+#	fi
+#fi
+#
+
+#
+# SAFE FOR ALL, MPC ONE NEEDS A FRICKIN HUB... GRRR
+# (protip, make sure that you use only one usb drive at a time... its a work in progress lol)
+#
+USBLIST=`ls /dev/sd*`
+for d in $USB_LIST; do
+  if [ -e "$d" ]; then
+    if [ ! -e /tmp/memorycard.lock ]; then
+      if [ ! -e "/media/memorycard" ]; then
+        mkdir /media/memorycard
+      fi
+      mount $d /media/memorycard
+      touch /tmp/memorycard.lock
+      MEMCARD=$d
+    fi
+  fi
+done;
+
+# unmount the acvs-synths
+if [ -e "/media/acvs-synths" ]; then
+	umount /media/acvs-synths
+fi
+
+# mount the acvs-synths
+if [ -e "/dev/mmcblk0p1" ]; then
+	if [ ! -e "/media/acvs-synths" ]; then
+		mkdir /media/acvs-synths
+	fi
+	mount $MEMCARD /media/acvs-synths
+fi
+
+## mountbind the midimaps or if we haven copied them lets copy them over
+if [ -e "/media/memorycard/Midi" ]; then
+	umount "/usr/share/Akai/SME0/Midi Learn"
+	mount -o bind "/media/memorycard/Midi" "/usr/share/Akai/SME0/Midi Learn"
+else
+	cp -Rp "/usr/share/Akai/SME0/Midi Learn" "/media/memorycard/Midi"
+fi
+
+## mountbind the synths or if we haven copied them lets copy them over
+if [ -e "/media/memorycard/Synths" ]; then
+	umount "/usr/share/Akai/Content/Synths"
+	mount -o bind "/media/memorycard/Synths" "/usr/share/Akai/Content/Synths"
+else
+	cp -Rp "/usr/share/Akai/Content/Synths" "/media/memorycard/Synths"
+fi
+
+## mountbind some the settings or if we haven copied them lets copy them over
+if [  -e "/media/memorycard/MPC.settings" ]; then
+	umount /media/az01-internal/Settings/MPC/MPC.settings
+	cp -Rp /media/memorycard/MPC.settings /tmp/MPC.settings
+	mount -o bind /tmp/MPC.settings /media/az01-internal/Settings/MPC/MPC.settings
+else
+	cp -Rp /media/az01-internal/Settings/MPC/MPC.settings /media/memorycard/MPC.settings
+fi
+	
+
+# make sure we plug these before ANY of the mpc programs because it makes a hyuuuuge difference on 3d effect, 
+# there was clearly a huge advancement here (makes a vast different sounding tubesynth seems to take away pops and cracks)
+export LD_PRELOAD="/usr/lib/libSOUL_PatchLoader.so /usr/lib/libcares.so.2.4.0 /usr/lib/libbluetooth.so.3.19.2" 
+
+
+##if the force temp file isnt in place...
+if [ ! -e /tmp/force.lock ]; then
+	
+	echo "Launching MPC" > /media/memorycard/cfw.log
+	
+	# unmount the magic remove the FORCE spoof
+	umount "/sys/firmware/devicetree/base/inmusic,product-code"
+	umount "/sys/firmware/devicetree/base/inmusic,panel-rotation"
+	
+	# mount the magic mount the MPC X spoof
+	#mount -o bind "/root/models/x/inmusic,panel-rotation" "/sys/firmware/devicetree/base/inmusic,panel-rotation"
+	#mount -o bind "/root/models/x/inmusic,product-code"   "/sys/firmware/devicetree/base/inmusic,product-code"
+	
+	cat "/sys/firmware/devicetree/base/inmusic,panel-rotation"  > /media/memorycard/cfw.log
+	cat "/sys/firmware/devicetree/base/inmusic,product-code"    > /media/memorycard/cfw.log
+	
+	if type systemd-inhibit >/dev/null 2>&1
+	then
+		exec systemd-inhibit --what=handle-power-key /usr/bin/MPC "$@"
+	else
+		# ORIGINAL MPC SOFTWARE
+		touch /tmp/force.lock
+		ulimit -S -s 1024
+		exec /usr/bin/MPC "$@"
+	fi
+	
+fi
+
+##if the force temp file isnt in place...
+if [ -e /tmp/force.lock ]; then
+	
+	echo "Launching FORCE" > /media/memorycard/cfw.log
+	
+	#unmount the magic unmount the MPC X spoof
+	#umount "/sys/firmware/devicetree/base/inmusic,product-code"
+	#umount "/sys/firmware/devicetree/base/inmusic,panel-rotation"
+	
+	# mount the magic mount the FORCE spoof
+	mount -o bind "/root/models/force/inmusic,panel-rotation" "/sys/firmware/devicetree/base/inmusic,panel-rotation"
+	mount -o bind "/root/models/force/inmusic,product-code"   "/sys/firmware/devicetree/base/inmusic,product-code"
+	
+	cat "/sys/firmware/devicetree/base/inmusic,panel-rotation"  > /media/memorycard/cfw.log
+	cat "/sys/firmware/devicetree/base/inmusic,product-code"    > /media/memorycard/cfw.log
+	
+	if type systemd-inhibit >/dev/null 2>&1
+	then
+		exec systemd-inhibit --what=handle-power-key /usr/bin/FORCE "Force"
+	else
+		# FORCE SOFTWARE
+		rm /tmp/force.lock
+		ulimit -S -s 1024
+		exec /usr/bin/FORCE "Force"
+	fi
+	
+fi
