@@ -315,3 +315,12 @@ The rest of the buttons (on the mpc one, feel free to add)
 	Q-link 2 Touch		86
 	Q-link 3 Touch		85
 	Q-link 3 Touch		84
+
+# WOAH MAJOR SOUND BUG FIX?
+
+Theres were the only 3 differeing libs between the Force firmware and the MPC firmware, preloading them before the 2.9.0 mpc software greatly reduces that popping and cracking the synths often give off and really widen out the reverb effect. It would appear that one of these librarys is a major sound fix. Test with and without them with tubsynth and you'll notice a vast difference. I included this in the first version of my firmware before both programs, but when i released the second version i only preloaded those libs when FORCE is enabled. oopsies! 
+
+	export LD_PRELOAD="/usr/lib/libSOUL_PatchLoader.so /usr/lib/libcares.so.2.4.0 /usr/lib/libbluetooth.so.3.19.2" 
+	
+
+	
