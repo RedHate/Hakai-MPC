@@ -322,6 +322,6 @@ Theres were the only 3 differeing libs between the Force firmware and the MPC fi
 
 	export LD_PRELOAD="/usr/lib/libSOUL_PatchLoader.so /usr/lib/libcares.so.2.4.0 /usr/lib/libbluetooth.so.3.19.2" 
 
-** EDIT ** so I did some snooping around, https://github.com/soul-lang <--- quite interesting...
+** EDIT ** so I did some snooping around, https://github.com/soul-lang <--- quite interesting. the other two arent really important libcares is for dns, the other is obvious.
 
 	
