@@ -1,6 +1,8 @@
 
 ## Ultros 2021 - MPC Exploration and hacks.
 
+![mpc-logo.png](https://github.com/RedHate/Hakai-MPC/blob/main/mpc-logo.png)
+
 # Akai System Spoofing Data For MPC ONE, LIVE and X
 
 First of all, Thank you to TheKikGen for taking the work out of modding the rom. You've done an excellent job with the tools and documentations. For those of you that haven't first taken a look at TheKikGen's github look here this is the foundation for rom modding and source for technical data: https://github.com/TheKikGen
